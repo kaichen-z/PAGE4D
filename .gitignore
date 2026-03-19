@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Checkpoints & weights
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Eval outputs (often large)
+eval/eval/**/eval_results/
+eval/eval/**/*.npy
+eval/eval/**/sintel_*/
+eval/eval/**/tum_*/
+eval/eval/**/bonn_*/
+eval/eval/**/dyncheck_*/
+
+# Logs
+logs/
+*.log
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+outputs/
+multirun/

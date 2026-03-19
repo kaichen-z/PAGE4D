@@ -1,0 +1,13 @@
+defaults:
+  - default_dataset.yaml
+
+data:
+  train:
+    dataset:
+      _target_: data.composed_dataset.ComposedDataset
+      dataset_configs:
+        - _target_: data.datasets.odyssey.OdysseyDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/odyssey/test
+          sequence_names: NULL
+          len_train: 1000

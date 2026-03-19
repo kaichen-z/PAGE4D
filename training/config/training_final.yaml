@@ -1,0 +1,344 @@
+defaults:
+  - default_dataset_fin.yaml
+
+exp_name: final_7_gra
+img_size: 518
+num_workers: 0
+seed_value: 42
+patch_size: 14
+val_epoch_freq: 6
+accum_steps: 2
+max_img_per_gpu: 32
+max_img_per_gpu_val: 32 
+
+limit_train_batches: 20 
+limit_val_batches: 200
+
+data:
+  train:
+    _target_: data.dynamic_dataloader.DynamicTorchDataset
+    num_workers: ${num_workers}
+    max_img_per_gpu: ${max_img_per_gpu}
+    common_config:
+      img_size: ${img_size}
+      patch_size: ${patch_size}
+      debug: False
+      repeat_batch: False
+    dataset:
+      _target_: data.composed_dataset.ComposedDataset
+      dataset_configs:
+        # ############################## Dataset ##############################
+        - _target_: data.datasets.odyssey.OdysseyDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/odyssey/train
+          sequence_names: NULL
+          len_train: 5000
+        - _target_: data.datasets.odyssey.OdysseyDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/odyssey/val
+          sequence_names: NULL
+          len_train: 1000
+        - _target_: data.datasets.odyssey.OdysseyDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/odyssey/test
+          sequence_names: NULL
+          len_train: 1000
+        # ############################## Odyssey ##############################
+        - _target_: data.datasets.dynamicreplica.DynamicReplicaDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/dynreplica/dynamic_stereo/dynamic_replica_data/train
+          sequence_names: NULL
+          len_train: 10000
+        - _target_: data.datasets.dynamicreplica.DynamicReplicaDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/dynreplica/dynamic_stereo/dynamic_replica_data/val
+          sequence_names: NULL
+          len_train: 1000
+        # ############################## Dynamic Replica ##############################
+        - _target_: data.datasets.kubric.KubricDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/kubric/output
+          sequence_names: NULL
+          len_train: 5000
+        # ############################## Kubric ##############################
+        - _target_: data.datasets.spring.SpringDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/spring/spring
+          sequence_names: NULL
+          len_train: 2500
+          eyes: right
+        - _target_: data.datasets.spring.SpringDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/spring/spring
+          sequence_names: NULL
+          len_train: 2500
+          eyes: left
+        # ############################## spring ##############################
+        - _target_: data.datasets.co3d.Co3dDataset
+          split: train
+          CO3D_DIR: /workspace/data/kaichen/data/co3d/co3d_data
+          CO3D_ANNOTATION_DIR: /workspace/data/kaichen/data/co3d/co3d_anno
+          sequence_names: NULL
+          len_train: 10000
+        # ############################## Co3d ##############################
+        - _target_: data.datasets.waymo.WaymoDataset
+          split: train
+          dataset_location: /workspace/data/kaichen/data/waymo/archived_files/training
+          sequence_names: NULL
+          len_train: 10000
+        # ############################## Waymo ##############################
+        # Adding more dataset here
+  val:
+    shuffle: True 
+    _target_: data.dynamic_dataloader.DynamicTorchDataset
+    num_workers: ${num_workers}
+    max_img_per_gpu: ${max_img_per_gpu_val}
+    common_config:
+      img_size: ${img_size}
+      patch_size: ${patch_size}
+      debug: False
+    dataset:
+      _target_: data.composed_dataset.ComposedDataset
+      dataset_configs:
+        - _target_: data.datasets.co3d.Co3dDataset
+          split: test
+          CO3D_DIR: /workspace/data/kaichen/data/co3d/co3d_data
+          CO3D_ANNOTATION_DIR: /workspace/data/kaichen/data/co3d/co3d_anno
+          sequence_names: NULL
+        - _target_: data.datasets.sintel.SintelDataset
+          split: test
+          dataset_location: /workspace/data/kaichen/data/test/Sintel
+          sequence_names: NULL
+        - _target_: data.datasets.dyncheck.DyncheckDataset
+          split: test
+          dataset_location: /workspace/data/kaichen/data/test/DYNCHECK
+          sequence_names: NULL
+        - _target_: data.datasets.bonn.BonnDataset
+          split: test
+          dataset_location: /workspace/data/kaichen/data/test/bonn/rgbd_bonn_dataset
+          sequence_names: NULL
+        - _target_: data.datasets.tum.TumDataset
+          split: test
+          dataset_location: /workspace/data/kaichen/data/test/tum
+          sequence_names: NULL
+          
+logging:
+  log_dir: /workspace/code/12_4d/PAGE4D/logs
+  log_visuals: False
+  log_freq: 1
+  log_level_primary: DEBUG
+  log_level_secondary: WARNING
+  all_ranks: False
+  tensorboard_writer:
+    _target_: train_utils.tb_writer.TensorBoardLogger
+    path: ${logging.log_dir}/tensorboard
+  scalar_keys_to_log:
+    train:
+      keys_to_log:
+        - loss_objective
+        - loss_camera
+        - loss_T
+        - loss_R
+        - loss_FL
+        - loss_conf_depth
+        - loss_reg_depth
+        - loss_grad_depth
+        - loss_conf_point
+        - loss_reg_point
+        - loss_grad_point
+        - loss_coord_track
+        - loss_vis_track
+        - loss_conf_track
+    val:
+      keys_to_log:
+        - loss_objective
+        - loss_camera
+        - loss_T
+        - loss_R
+        - loss_FL
+        - loss_conf_depth
+        - loss_reg_depth
+        - loss_grad_depth
+        - loss_conf_point
+        - loss_reg_point
+        - loss_grad_point
+        - loss_coord_track
+        - loss_vis_track
+        - loss_conf_track
+
+checkpoint:
+  save_dir: /workspace/data/kaichen/log_ckpts/${exp_name}/ckpts
+  save_freq: 25
+  resume_checkpoint_path: /workspace/data/kaichen/log_ckpts/final_7_gra/ckpts/checkpoint.pt
+  strict: False
+
+loss:
+  _target_: loss.MultitaskLoss
+  camera: 
+    weight: 5.0
+    loss_type: "l1" # The paper uses smooth l1 loss, but we found l1 loss is more stable than smooth l1 and l2 loss.  
+  depth:
+    weight: 1.0
+    gamma: 0.3
+    alpha: 0.06
+    gradient_loss_fn: "grad" 
+    valid_range: 0.98
+  point: 
+     weight: 1.0
+     gradient_loss_fn: "normal" 
+     valid_range: 0.98
+  track: 
+    weight: 0.0
+
+optim:
+  param_group_modifiers: True
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 1e-5
+    weight_decay: 0.01
+
+  frozen_module_names:
+    - "aggregator.patch_embed"
+    - "aggregator.frame_blocks.0"
+    - "aggregator.frame_blocks.1"
+    - "aggregator.frame_blocks.2"
+    - "aggregator.frame_blocks.3"
+    - "aggregator.frame_blocks.4"
+    - "aggregator.frame_blocks.5"
+    - "aggregator.frame_blocks.6"
+    - "aggregator.frame_blocks.7"
+    - "aggregator.frame_blocks.8"
+    - "aggregator.frame_blocks.9"
+    - "aggregator.frame_blocks.20"
+    - "aggregator.frame_blocks.21"
+    - "aggregator.frame_blocks.22"
+    - "aggregator.frame_blocks.23"
+    - "aggregator.rope"
+    - "depth_head"
+    - "point_head"
+    - "camera_head"
+    - "aggregator.global_blocks.0"
+    - "aggregator.global_blocks.1"
+    - "aggregator.global_blocks.2"
+    - "aggregator.global_blocks.3"
+    - "aggregator.global_blocks.4"
+    - "aggregator.global_blocks.5"
+    - "aggregator.global_blocks.6"
+    - "aggregator.global_blocks.7"
+    - "aggregator.global_blocks.8"
+    - "aggregator.global_blocks.9"
+    - "aggregator.global_blocks.20"
+    - "aggregator.global_blocks.21"
+    - "aggregator.global_blocks.22"
+    - "aggregator.global_blocks.23"
+
+  amp:
+    enabled: True
+    amp_dtype: bfloat16
+  gradient_clip:
+    _target_: train_utils.gradient_clip.GradientClipper
+    configs:
+      - module_name: ["aggregator"]
+        max_norm: 1.  
+        norm_type: 2
+      - module_name: ["depth"]
+        max_norm: 1.  
+        norm_type: 2
+      - module_name: ["camera"]
+        max_norm: 1.  
+        norm_type: 2
+      - module_name: ["track"]
+        max_norm: 1.
+        norm_type: 2
+      - module_name: ["point"]
+        max_norm: 1.
+        norm_type: 2
+
+  options:
+    lr:
+      - param_names: ["aggregator.spatial_mask_head.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.CompositeParamScheduler
+          schedulers:
+            - _target_: fvcore.common.param_scheduler.LinearParamScheduler
+              start_value: 1e-8
+              end_value: 2e-5
+            - _target_: fvcore.common.param_scheduler.CosineParamScheduler
+              start_value: 2e-5
+              end_value: 1e-8
+          lengths: [0.15, 0.85]
+          interval_scaling: ['rescaled', 'rescaled']
+      # Composite LR for global blocks 6, 7, 8, 9, 10, 11
+      - param_names: ["aggregator.frame_blocks.10.*", "aggregator.frame_blocks.11.*", "aggregator.frame_blocks.12.*", "aggregator.frame_blocks.13.*", "aggregator.frame_blocks.14.*", "aggregator.frame_blocks.15.*", "aggregator.frame_blocks.16.*", "aggregator.frame_blocks.17.*", "aggregator.frame_blocks.18.*", "aggregator.frame_blocks.19.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.CompositeParamScheduler
+          schedulers:
+            - _target_: fvcore.common.param_scheduler.LinearParamScheduler
+              start_value: 1e-8
+              end_value: 1e-5
+            - _target_: fvcore.common.param_scheduler.CosineParamScheduler
+              start_value: 1e-5
+              end_value: 1e-8
+          lengths: [0.05, 0.95]
+          interval_scaling: ['rescaled', 'rescaled']
+      # Default for remaining parameters (automatically added if none specified)
+      - param_names: ["aggregator.global_blocks.10.*", "aggregator.global_blocks.11.*", "aggregator.global_blocks.12.*", "aggregator.global_blocks.13.*", "aggregator.global_blocks.14.*", "aggregator.global_blocks.15.*", "aggregator.global_blocks.16.*", "aggregator.global_blocks.17.*", "aggregator.global_blocks.18.*", "aggregator.global_blocks.19.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.CompositeParamScheduler
+          schedulers:
+            - _target_: fvcore.common.param_scheduler.LinearParamScheduler
+              start_value: 1e-8
+              end_value: 1e-5
+            - _target_: fvcore.common.param_scheduler.CosineParamScheduler
+              start_value: 1e-5
+              end_value: 1e-8
+          lengths: [0.05, 0.95]
+          interval_scaling: ['rescaled', 'rescaled']
+      # Default for remaining parameters (automatically added if none specified)
+      - scheduler:
+          _target_: fvcore.common.param_scheduler.ConstantParamScheduler
+          value: 0.0
+    weight_decay:
+      # 0.02 weight decay for temporal blocks
+      - param_names: ["aggregator.spatial_mask_head.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.ConstantParamScheduler
+          value: 0.02
+      # 0.01 weight decay for global blocks 6, 7, 8, 9, 10, 11
+      - param_names: ["aggregator.frame_blocks.10.*", "aggregator.frame_blocks.11.*", "aggregator.frame_blocks.12.*", "aggregator.frame_blocks.13.*", "aggregator.frame_blocks.14.*", "aggregator.frame_blocks.15.*", "aggregator.frame_blocks.16.*", "aggregator.frame_blocks.17.*", "aggregator.frame_blocks.18.*", "aggregator.frame_blocks.19.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.ConstantParamScheduler
+          value: 0.01
+      - param_names: ["aggregator.global_blocks.10.*", "aggregator.global_blocks.11.*", "aggregator.global_blocks.12.*", "aggregator.global_blocks.13.*", "aggregator.global_blocks.14.*", "aggregator.global_blocks.15.*", "aggregator.global_blocks.16.*", "aggregator.global_blocks.17.*", "aggregator.global_blocks.18.*", "aggregator.global_blocks.19.*"]
+        scheduler:
+          _target_: fvcore.common.param_scheduler.ConstantParamScheduler
+          value: 0.01
+      - scheduler:
+          _target_: fvcore.common.param_scheduler.ConstantParamScheduler
+          value: 0.0
+
+max_epochs: 1600
+
+model:
+  _target_: page.models.vggt.VGGT
+  enable_camera: True  
+  enable_depth: True
+  enable_point: True
+  enable_track: False
+  mask_hold_start: 6000
+  mask_hold_end: 10000
+
+distributed:
+  # check https://docs.pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html for options
+  backend: nccl
+  comms_dtype: None
+  find_unused_parameters: True
+  timeout_mins: 30
+  gradient_as_bucket_view: True  # Less memory used
+  bucket_cap_mb: 25
+  broadcast_buffers: True
+
+cuda:
+    cudnn_deterministic: False
+    cudnn_benchmark: False
+    allow_tf32: True

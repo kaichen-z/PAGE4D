@@ -1,0 +1,21 @@
+# HuggingFace Accelerate + DeepSpeed ZeRO-2 (CPU offload) for memory reduction
+# Use: accelerate launch --config_file training/config/accelerate_config.yaml training/launch.py --config final_9
+# Requires: trainer.py refactored to use Accelerator().prepare(model, optimizer, dataloader)
+# Install: pip install accelerate deepspeed
+
+compute_environment: LOCAL_MACHINE
+distributed_type: DEEPSPEED
+downcast_bf16: 'no'
+machine_rank: 0
+main_training_function: main
+mixed_precision: bf16
+num_machines: 1
+num_processes: 4
+rdzv_backend: static
+same_network: true
+tpu_env: []
+tpu_use_cluster: false
+tpu_use_sudo: false
+use_cpu: false
+
+deepspeed_config_file: config/ds_config.json
