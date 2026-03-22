@@ -1,13 +1,12 @@
 <div align="center">
 <h1>Page-4d: Disentangled pose and geometry estimation for VGGT-4d perception</h1>
 
-<a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF">
-</a>
+<a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer"> 
+<img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
 <a href="https://arxiv.org/pdf/2510.17568"><img src="https://img.shields.io/badge/arXiv-2510.17568-b31b1b" alt="arXiv"></a>
 <a href="https://page4d.github.io/"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
 
-**[Media Lab, MIT](https://www.media.mit.edu/)**;
+**[Media Lab, MIT](https://www.media.mit.edu/)**; 
 **[Harvard Medical School](https://hms.harvard.edu/)**
 
 [Kaichen Zhou](https://kaichen-z.github.io/), [Yuhan Wang](https://www.google.com), [Grave Chen](https://www.google.com), [Xinhai Chang](https://chang-xinhai.github.io/), [Gaspard Beaudouin](https://www.google.com), [Fangneng Zhan](https://fnzhan.com/), [Paul Pu Liang†](https://pliang279.github.io/), [Mengyu Wang†](https://wang.hms.harvard.edu/team/dr-wang/)
@@ -217,6 +216,12 @@ with torch.no_grad():
 **Spatial mask during training.** Fine-tuning uses a learnable spatial mask in the aggregator (`SpatialMaskHead_IMP` in `model/page/layers/block.py`). Its strength is scheduled with `mask_alpha(step, mask_hold_start, mask_hold_end)`: the mask is fully on for early optimizer steps, then its influence is reduced smoothly (cosine decay) until it is off. Set `mask_hold_start` / `mask_hold_end` in your training config (e.g. `training_final.yaml` under `model`).
 
 **At inference.** With the default eval setup (`mask_hold_start=mask_hold_end=0`, e.g. `--num_mask 0` in launch scripts), `mask_alpha` yields zero strength while `step` stays at 0, so `cam_row_mask` is all zeros and the attention module skips the Q/K bias augmentation (`attention.py`: `attn_mask.any()` is false). The forward pass then matches ordinary self-attention, so you can run inference in the same way as standard VGGT-style multi-view forward. If you load a checkpoint trained with a non-zero mask schedule and need the mask path active at test time, pass matching non-zero `mask_hold_start` / `mask_hold_end` when constructing the model.
+
+**Weights (download).** Pretrained weights are released as `checkpoint_nomask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
+
+```bash
+huggingface-cli download zhouk777/PAGE4D checkpoint_nomask.pt --repo-type dataset --local-dir .
+```
 
 ## Interactive Demo
 
