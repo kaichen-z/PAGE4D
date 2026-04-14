@@ -15,10 +15,11 @@
 </div>
 
 ```bibtex
-@inproceedings{zhou2025page,
-  title={Page-4d: Disentangled pose and geometry estimation for VGGT-4d perception},
+@article{zhou2025page,
+  title={Page-4d: Disentangled pose and geometry estimation for 4d perception},
   author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Chang, Xinhai and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
-  booktitle={The Fourteenth International Conference on Learning Representations},
+  journal={arXiv e-prints},
+  pages={arXiv--2510},
   year={2025}
 }
 ```
