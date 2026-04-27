@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Page-4d: Disentangled pose and geometry estimation for VGGT-4d perception</h1>
+<h1>Page-4d: Disentangled pose and geometry estimation for VGGT-4D perception (VGGT-4D)</h1>
 
 <a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer"> 
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
@@ -218,10 +218,16 @@ with torch.no_grad():
 
 **At inference.** With the default eval setup (`mask_hold_start=mask_hold_end=0`, e.g. `--num_mask 0` in launch scripts), `mask_alpha` yields zero strength while `step` stays at 0, so `cam_row_mask` is all zeros and the attention module skips the Q/K bias augmentation (`attention.py`: `attn_mask.any()` is false). The forward pass then matches ordinary self-attention, so you can run inference in the same way as standard VGGT-style multi-view forward. If you load a checkpoint trained with a non-zero mask schedule and need the mask path active at test time, pass matching non-zero `mask_hold_start` / `mask_hold_end` when constructing the model.
 
-**Weights (download).** Pretrained weights are released as `checkpoint_nomask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
+**Download Weights (non mask version - use the mask only during the early stage of training) (Suggested).** Pretrained weights are released as `checkpoint_nomask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
 
 ```bash
 huggingface-cli download zhouk777/PAGE4D checkpoint_nomask.pt --repo-type dataset --local-dir .
+```
+
+**Download Weights (mask version - always keep mask during training).** Pretrained weights are released as `checkpoint_mask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
+
+```bash
+huggingface-cli download zhouk777/PAGE4D checkpoint_mask.pt --repo-type dataset --local-dir .
 ```
 
 ## Interactive Demo
