@@ -9,7 +9,7 @@
 **[Media Lab, MIT](https://www.media.mit.edu/)**; 
 **[Harvard Medical School](https://hms.harvard.edu/)**
 
-[Kaichen Zhou](https://kaichen-z.github.io/), [Yuhan Wang](https://www.google.com), [Grave Chen](https://www.google.com), [Xinhai Chang](https://chang-xinhai.github.io/), [Gaspard Beaudouin](https://www.google.com), [Fangneng Zhan](https://fnzhan.com/), [Paul Pu Liang†](https://pliang279.github.io/), [Mengyu Wang†](https://wang.hms.harvard.edu/team/dr-wang/)
+[Kaichen Zhou](https://kaichen-z.github.io/), [Yuhan Wang](https://yuhanwang14.github.io/), [Grace Chen](https://gracee-chen.github.io/), [Xinhai Chang](https://chang-xinhai.github.io/), [Gaspard Beaudouin](https://www.google.com), [Fangneng Zhan](https://fnzhan.com/), [Paul Pu Liang†](https://pliang279.github.io/), [Mengyu Wang†](https://wang.hms.harvard.edu/team/dr-wang/)
 
 **(†: Jointly Supervised)**
 </div>
@@ -19,7 +19,7 @@
   title={Page-4d: Disentangled pose and geometry estimation for 4d perception},
   author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Chang, Xinhai and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
   journal={arXiv e-prints},
-  pages={arXiv--2510},
+  pages={arXiv--2510}c
   year={2025}
 }
 ```
