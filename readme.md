@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Page-4d: Disentangled pose and geometry estimation for VGGT-4D perception (VGGT-4D)</h1>
+<h1>Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation</h1>
 
 <a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer"> 
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
