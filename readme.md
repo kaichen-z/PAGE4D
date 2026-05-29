@@ -16,10 +16,9 @@
 
 ```bibtex
 @article{zhou2025page,
-  title={Page-4d: Disentangled pose and geometry estimation for 4d perception},
+  title={PAGE-4D: Disentangled Pose and Geometry Estimation for VGGT-4D Perception},
   author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Chang, Xinhai and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
-  journal={arXiv e-prints},
-  pages={arXiv--2510},
+  journal={arXiv preprint arXiv:2510.17568},
   year={2025}
 }
 ```
