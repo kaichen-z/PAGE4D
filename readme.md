@@ -1,9 +1,9 @@
 <div align="center">
 <h1>Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation</h1>
 
-<sub>Two variants with similar performance:<br>
+Two variants with similar performance:<br>
 1.Training-only masking (identical to VGGT).<br>
-2.Inference-time masking (VGGT with Mask).</sub>
+2.Inference-time masking (VGGT with Mask).
 
 <a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer"> 
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
