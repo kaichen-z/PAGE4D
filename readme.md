@@ -2,8 +2,8 @@
 <h1>Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation</h1>
 
 Two variants with similar performance:<br>
-1.Training-only masking (identical to VGGT).<br>
-2.Inference-time masking (VGGT with Mask).
+1.Training-only masking (= VGGT Structure).<br>
+2.Inference-time masking (VGGT Structure with Mask).
 
 <a href="https://openreview.net/pdf?id=Nfmzp5PBzr" target="_blank" rel="noopener noreferrer"> 
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
@@ -233,8 +233,8 @@ mask_hold_end > 0
 ```
 
 Two variants with similar performance:  
-1.Training-only masking (identical to VGGT).  
-2.Inference-time masking (VGGT with Mask).
+1.Training-only masking (= VGGT Structure).  
+2.Inference-time masking (VGGT Structure with Mask).
 
 **Download Weights (non mask version - use the mask only during the early stage of training) (Suggested).** Pretrained weights are released as `checkpoint_nomask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
 
