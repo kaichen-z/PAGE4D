@@ -219,7 +219,22 @@ with torch.no_grad():
 
 **Spatial mask during training.** Fine-tuning uses a learnable spatial mask in the aggregator (`SpatialMaskHead_IMP` in `model/page/layers/block.py`). Its strength is scheduled with `mask_alpha(step, mask_hold_start, mask_hold_end)`: the mask is fully on for early optimizer steps, then its influence is reduced smoothly (cosine decay) until it is off. Set `mask_hold_start` / `mask_hold_end` in your training config (e.g. `training_final.yaml` under `model`).
 
-**At inference.** With the default eval setup (`mask_hold_start=mask_hold_end=0`, e.g. `--num_mask 0` in launch scripts), `mask_alpha` yields zero strength while `step` stays at 0, so `cam_row_mask` is all zeros and the attention module skips the Q/K bias augmentation (`attention.py`: `attn_mask.any()` is false). The forward pass then matches ordinary self-attention, so you can run inference in the same way as standard VGGT-style multi-view forward. If you load a checkpoint trained with a non-zero mask schedule and need the mask path active at test time, pass matching non-zero `mask_hold_start` / `mask_hold_end` when constructing the model.
+**At inference:**
+
+```python
+#Non-mask version:
+mask_hold_start = 0
+mask_hold_end = 0
+```
+```python
+#Mask-enabled version:
+mask_hold_start > 0
+mask_hold_end > 0
+```
+
+Two variants with similar performance:
+1. Training-only masking (identical to VGGT).
+2. Inference-time masking (VGGT with Mask).
 
 **Download Weights (non mask version - use the mask only during the early stage of training) (Suggested).** Pretrained weights are released as `checkpoint_nomask.pt` on Hugging Face ([dataset page](https://huggingface.co/datasets/zhouk777/PAGE4D/tree/main)). Download the file and point the Quick Start `Directory` (or eval `model_weights`) to its path:
 
