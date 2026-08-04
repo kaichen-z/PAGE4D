@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation</h1>
+<h1>PAGE-4D: Disentangled Pose and Geometry Estimation for VGGT-4D Perception</h1>
 
 Two variants with similar performance:<br>
 1.Training-only masking (<ins>**= VGGT Structure**</ins>).<br>
@@ -20,10 +20,13 @@ Two variants with similar performance:<br>
 </div>
 
 ```bibtex
-@inproceedings{zhoupage,
-  title={PAGE-4D: VGGT-4D Perception via Disentangled Pose and Geometry Estimation},
-  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
-  booktitle={The Fourteenth International Conference on Learning Representations}
+@inproceedings{zhou2026page,
+  title={Page-4d: Disentangled pose and geometry estimation for vggt-4d perception},
+  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul and Wang, Mengyu},
+  booktitle={International Conference on Learning Representations},
+  volume={2026},
+  pages={36401--36414},
+  year={2026}
 }
 ```
 
