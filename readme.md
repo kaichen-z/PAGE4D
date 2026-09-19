@@ -9,7 +9,7 @@ Two variants with similar performance:<br>
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
 <a href="https://arxiv.org/pdf/2510.17568"><img src="https://img.shields.io/badge/arXiv-2510.17568-b31b1b" alt="arXiv"></a>
 <a href="https://page4d.github.io/"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
-<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8S6_34oAAAAJ&sortby=pubdate&citation_for_view=8S6_34oAAAAJ:1sJd4Hv_s6UC"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fkaichen-z.github.io%2Fdata%2Fstats.json&query=%24.citations%5B%27page-4d%27%5D&label=Citations&color=blue" alt="Google Scholar citations"></a>
+<a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8S6_34oAAAAJ&sortby=pubdate&citation_for_view=8S6_34oAAAAJ:mvPsJ3kp5DgC"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fkaichen-z.github.io%2Fdata%2Fstats.json&query=%24.citations%5B%27page-4d%27%5D&label=Citations&color=blue" alt="Google Scholar citations"></a>
 
 **[Media Lab, MIT](https://www.media.mit.edu/)**; 
 **[Harvard Medical School](https://hms.harvard.edu/)**
@@ -21,12 +21,12 @@ Two variants with similar performance:<br>
 
 ```bibtex
 @inproceedings{zhou2026page,
-  title={Page-4d: Disentangled pose and geometry estimation for vggt-4d perception},
-  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul and Wang, Mengyu},
-  booktitle={International Conference on Learning Representations},
-  volume={2026},
+  title={PAGE-4D: Disentangled Pose and Geometry Estimation for VGGT-4D Perception},
+  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
+  booktitle={International Conference on Learning Representations (ICLR)},
   pages={36401--36414},
-  year={2026}
+  year={2026},
+  url={https://proceedings.iclr.cc/paper_files/paper/2026/hash/3d55170799265c03b37993e02b71b2cc-Abstract-Conference.html}
 }
 ```
 
