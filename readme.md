@@ -19,14 +19,20 @@ Two variants with similar performance:<br>
 **(†: Jointly Supervised)**
 </div>
 
+## Citation
+
+[Download BibTeX](https://page4d.github.io/citation.bib)
+
 ```bibtex
-@inproceedings{zhou2026page,
-  title={PAGE-4D: Disentangled Pose and Geometry Estimation for VGGT-4D Perception},
-  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
-  booktitle={International Conference on Learning Representations (ICLR)},
-  pages={36401--36414},
-  year={2026},
-  url={https://proceedings.iclr.cc/paper_files/paper/2026/hash/3d55170799265c03b37993e02b71b2cc-Abstract-Conference.html}
+@inproceedings{ICLR2026_3d551707,
+ author = {Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul and Wang, Mengyu},
+ booktitle = {International Conference on Learning Representations},
+ editor = {C. Vondrick and B. Hariharan and C. Raffel and L. Pinto and D. Yang and A. Faust},
+ pages = {36401--36414},
+ title = {PAGE-4D: Disentangled Pose and Geometry Estimation for VGGT-4D Perception},
+ url = {https://proceedings.iclr.cc/paper_files/paper/2026/file/3d55170799265c03b37993e02b71b2cc-Paper-Conference.pdf},
+ volume = {2026},
+ year = {2026}
 }
 ```
 
