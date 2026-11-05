@@ -9,7 +9,7 @@ Two variants with similar performance:<br>
 <img src="https://img.shields.io/badge/Paper-VGGT" alt="Paper PDF"></a>
 <a href="https://arxiv.org/pdf/2510.17568"><img src="https://img.shields.io/badge/arXiv-2510.17568-b31b1b" alt="arXiv"></a>
 <a href="https://page4d.github.io/"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
-<a href="https://arxiv.org/pdf/2510.17568"><img src="https://img.shields.io/badge/Citations-34-blue" alt="34 citations"></a>
+<a href="https://arxiv.org/pdf/2510.17568"><img src="https://img.shields.io/badge/Citations-40-blue" alt="40 citations"></a>
 
 **[Media Lab, MIT](https://www.media.mit.edu/)**; 
 **[Harvard Medical School](https://hms.harvard.edu/)**
